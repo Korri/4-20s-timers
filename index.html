@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Challenger timers</title>
+    <style>
+        body, html {
+            margin: 0;
+            height: 100%;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .timer {
+            display: table-cell;
+            width: 50%;
+            height: 50%;
+            float: left;
+            color: white;
+            font-size: 20vh;
+            text-align: center;
+            line-height: 50vh;
+            cursor: pointer;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+</head>
+<body>
+<div class="timer" style="background-color: #00a368">00:00</div>
+<div class="timer" style="background-color: #ffd300">00:00</div>
+<div class="timer" style="background-color: #c40233">00:00</div>
+<div class="timer" style="background-color: #0088bf">00:00</div>
+<script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.min.js"
+        crossorigin="anonymous"></script>
+<script>
+    var TIMER = 20;
+    $timers = $('.timer');
+    $timers.click(function () {
+        $(this).data('started', Date.now());
+    });
+    setInterval(function () {
+        $timers.each(function () {
+            var diff = Date.now() - ($(this).data('started') || 0),
+                remaining = TIMER * 1000 - diff;
+            if (remaining < 0) {
+                remaining = 0;
+            }
+            var seconds = Math.floor(remaining / 1000);
+            var ms = Math.floor(remaining % 1000 / 10);
+
+            if (seconds < 10) {
+                seconds = `0${seconds}`;
+            }
+            if (ms < 10) {
+                ms = `0${ms}`;
+            }
+            $(this).text(`${seconds}:${ms}`);
+        });
+    }, 1);
+</script>
+</body>
+</html>
