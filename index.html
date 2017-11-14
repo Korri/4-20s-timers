@@ -51,15 +51,9 @@
                     remaining = 0;
                     return killTimer();
                 }
-                let seconds = Math.floor(remaining / 1000);
-                let ms = Math.floor(remaining % 1000 / 10);
+                let seconds = `0${Math.floor(remaining / 1000)}`.slice(-2);
+                let ms = `0${Math.floor(remaining % 1000 / 10)}`.slice(-2);
 
-                if (seconds < 10) {
-                    seconds = `0${seconds}`;
-                }
-                if (ms < 10) {
-                    ms = `0${ms}`;
-                }
                 timer.innerHTML = `${seconds}:${ms}`;
             }, 10);
         }
