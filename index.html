@@ -30,7 +30,7 @@
 <div class="timer" style="background-color: #c40233">00:00</div>
 <div class="timer" style="background-color: #0088bf">00:00</div>
 <script>
-    const TIMER_DURATION = isNaN(Number(location.hash.substr(1)) ? 20 : Number(location.hash.substr(1));
+    const TIMER_DURATION = isNaN(Number(location.hash.substr(1))) ? 30 : Number(location.hash.substr(1));
 
     for (let timer of document.getElementsByClassName('timer')) {
         let started = 0,
